@@ -7,6 +7,30 @@ function startTask(){
 	$('#endtask').show('slow');
 }
 
+function timeAction(){
+	if($stopwatchMinute > 5){
+		$("#stopwatch").css({
+			'color' : '#EDAD0B'
+		});
+		message="お疲れ様でした！ やれましたね！";
+		$('.gazou').attr("src","bafter.png");
+		$timeAction = setTimeout("timeAction()", 300000);
+	}
+
+	if($stopwatchMinute > 10){
+		$("#stopwatch").css({
+			'color' : '#C7243A'
+		});
+		message="お疲れ様でした！ 集中されていましたね！";
+		$timeAction = setTimeout("timeAction()", 1500000);
+	}
+
+	if($stopwatchMinute > 25){
+		$('.gazou').attr("src","genki.png");
+		message="お疲れ様でした！ 素晴らしい集中力！";
+	}
+}
+
 function endTask(){
 	clearTimeout( $stopwatch );
 	if($("#modal-overlay")[0]) $("#modal-overlay").remove() ;
@@ -25,9 +49,11 @@ function endTask(){
 	if( $stopwatchSecond > 0 ){
         time += $stopwatchSecond + '秒';
 	}
-	var result = $("#task").val() + 'を' + time + 'やりました!';
+	var task = $("#task").val();
+	task = task.length >0 ? task : "タスク";
+	var result = task + 'を' + time + 'やりました!';
 	$("#result").text(result);
-	$("#tweet").appendTweetButton("http://mementoo.info/",result + "　#やる気無い時タスクタイマー");
+	$("#tweet").appendTweetButton("https://anchor-cable.github.io/2018k-app/",result + "　#やる気無い時タスクタイマー");
 
 	$("#modal-overlay").fadeIn("slow");
 	$("#modal-content").fadeIn("slow");
@@ -90,24 +116,7 @@ function stopwatchStart(){
     $stopwatchMinute = Math.floor( $stopwatchTime / 1000 / 60 ) % 60;
     $stopwatchHour = Math.floor( Math.floor( $stopwatchTime / 1000 / 60 ) / 60 );
 
-	if($stopwatchMinute > 5){
-		$("#stopwatch").css({
-			'color' : '#EDAD0B'
-		});
 
-		message="お疲れ様でした！ やれましたね！";
-	}
-
-	if($stopwatchMinute > 10){
-		$("#stopwatch").css({
-			'color' : '#C7243A'
-		});
-		message="お疲れ様でした！ 集中されていましたね！";
-	}
-
-	if($stopwatchMinute > 25){
-		message="お疲れ様でした！ 素晴らしい集中力！";
-	}
 
     if( $stopwatchSecond < 10 ){
         $stopwatchSecond = '0' + $stopwatchSecond;
@@ -123,7 +132,8 @@ function stopwatchStart(){
     $( '#stopwatchMinute' ).text( $stopwatchMinute );
 	$( '#stopwatchSecond' ).text( $stopwatchSecond );
 
-	$stopwatch = setTimeout( "stopwatchStart()", 1 );
+	$stopwatch = setTimeout( "stopwatchStart()", 500 );
+	$timeAction = setTimeout("timeAction()", 300000);
 
 };
 

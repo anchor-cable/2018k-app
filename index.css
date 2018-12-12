@@ -116,3 +116,11 @@ input[type="text"]{
 	left:0;
 }
 
+.image{
+    text-align: center
+}
+
+.gazou{
+    width:30%;
+    height: 30%;
+}
