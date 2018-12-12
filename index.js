@@ -84,11 +84,9 @@ function centeringModalSyncer(){
 	//画面(ウィンドウ)の高さを取得し、変数[h]に格納
 	var h = $(window).height();
 
-	//コンテンツ(#modal-content)の幅を取得し、変数[cw]に格納
-	var cw = $("#modal-content").outerWidth({margin:true});
+	var cw = 400;
 
-	//コンテンツ(#modal-content)の高さを取得し、変数[ch]に格納
-	var ch = $("#modal-content").outerHeight({margin:true});
+	var ch = 100;
 
 	//コンテンツ(#modal-content)を真ん中に配置するのに、左端から何ピクセル離せばいいか？を計算して、変数[pxleft]に格納
 	var pxleft = ((w - cw)/2);
